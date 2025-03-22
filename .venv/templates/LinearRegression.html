@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regresión Lineal Flask</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 40px;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px;
+        }
+        img {
+            width: 80%;
+            max-width: 500px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Regresión Lineal: Horas de Estudio vs Nota Final</h1>
+    
+    <form method="POST">
+        <label for="horas">Horas de Estudio:</label>
+        <input type="number" name="horas" step="0.1" required>
+        <button type="submit">Predecir Nota</button>
+    </form>
+
+    {% if resultado is not none %}
+        <h2>Nota Estimada: {{ resultado }}</h2>
+    {% endif %}
+
+    <img src="{{ imagen }}" alt="Gráfico de Regresión Lineal">
+</body>
+</html>

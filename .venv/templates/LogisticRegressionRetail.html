@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Regresión Logística Inmobiliaria</title>
+</head>
+<body>
+    <h1>Resultados de la Regresión Logística</h1>
+    
+    <h2>Métricas de Evaluación</h2>
+    <p><strong>Exactitud (Accuracy):</strong> {{ accuracy }}</p>
+
+    <h3>Reporte de Clasificación</h3>
+    <ul>
+        <li><strong>Precisión (No compra - 0):</strong> {{ report['0']['precision'] }}</li>
+        <li><strong>Recall (No compra - 0):</strong> {{ report['0']['recall'] }}</li>
+        <li><strong>F1-Score (No compra - 0):</strong> {{ report['0']['f1-score'] }}</li>
+        <hr>
+        <li><strong>Precisión (Compra - 1):</strong> {{ report['1']['precision'] }}</li>
+        <li><strong>Recall (Compra - 1):</strong> {{ report['1']['recall'] }}</li>
+        <li><strong>F1-Score (Compra - 1):</strong> {{ report['1']['f1-score'] }}</li>
+        <hr>
+        <li><strong>Exactitud Global:</strong> {{ report['accuracy'] }}</li>
+    </ul>
+
+    <h3>Matriz de Confusión</h3>
+    <img src="data:image/png;base64,{{ confusion_matrix_plot }}" alt="Matriz de confusión">
+    
+    <hr>
+    <h2>Predicción de Compra de Propiedad</h2>
+    
+    {% if prediction %}
+        <p><strong>Resultado de la predicción:</strong> {{ prediction }}</p>
+        <p>Ingresos: {{ ingresos_val }}</p>
+        <p>Zona: {{ zona_val }}</p>
+        <p>Tamaño: {{ tamano_val }}</p>
+        <p>Visitas: {{ visitas_val }}</p>
+        <hr>
+    {% endif %}
+    
+    {% if error %}
+        <p style="color:red;">{{ error }}</p>
+    {% endif %}
+    
+    <form method="POST">
+        <label for="ingresos">Ingresos:</label><br>
+        <input type="number" step="any" name="ingresos" id="ingresos" required><br><br>
+        
+        <label for="zona">Zona (0 - 5):</label><br>
+        <input type="number" step="any" name="zona" id="zona" required><br><br>
+        
+        <label for="tamano">Tamaño del Inmueble (m²):</label><br>
+        <input type="number" step="any" name="tamano" id="tamano" required><br><br>
+        
+        <label for="visitas">Visitas:</label><br>
+        <input type="number" step="any" name="visitas" id="visitas" required><br><br>
+        
+        <button type="submit">Predecir</button>
+    </form>
+    
+</body>
+</html>
